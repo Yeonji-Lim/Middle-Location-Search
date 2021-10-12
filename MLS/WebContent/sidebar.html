@@ -1,0 +1,135 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Kakao 지도 시작하기</title>
+  <link rel="stylesheet" href="sidebar.css" type="text/html">
+  <style>
+    input[id="menuicon"] {
+      display: none;
+    }
+
+    input[id="menuicon"]+label {
+      display: block;
+      margin: 30px;
+      width: 60px;
+      height: 50px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    input[id="menuicon"]+label span {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      border-radius: 30px;
+      background: #000;
+      transition: all.35s;
+    }
+
+    input[id="menuicon"]+label span:nth-child(1) {
+      top: 0;
+    }
+
+    input[id="menuicon"]+label span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    input[id="menuicon"]+label span:nth-child(3) {
+      bottom: 0;
+    }
+
+    input[id="menuicon"]:checked+label {
+      z-index: 2;
+    }
+
+    input[id="menuicon"]:checked+label span {
+      background: #fff;
+    }
+
+    input[id="menuicon"]:checked+label span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    input[id="menuicon"]:checked+label span:nth-child(2) {
+      opacity: 0;
+    }
+
+    input[id="menuicon"]:checked+label span:nth-child(3) {
+      bottom: 50%;
+      transform: translateY(50%) rotate(-45deg);
+    }
+
+    div[class="sidebar"] {
+      width: 300px;
+      height: 100%;
+      background: #222;
+      position: fixed;
+      top: 0;
+      left: -300px;
+      z-index: 1;
+      transition: all .35s;
+    }
+
+    input[id="menuicon"]:checked+label+div {
+      left: 0;
+    }
+
+    div[id="map"]{
+      z-index: 3;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map" style="width:100%; height:100%"></div>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f"></script>
+  
+  <script>
+    var container = document.getElementById('map');
+    var options = {
+      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+      addMarker(mouseEvent.latLng);
+    });
+
+    var markers = [];
+
+    function addMarker(position) {
+      var marker = new kakao.maps.Marker({
+        position: position
+      });
+      marker.setMap(map);
+      markers.push(marker);
+    }
+
+    addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
+
+    var marker = new kakao.maps.Marker({
+      position: markerPosition
+    });
+
+    marker.setMap(map);
+  </script>
+
+  <input type="checkbox" id="menuicon">
+  <label for="menuicon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+  <div class="sidebar">
+
+  </div>
+</body>
+
+</html>
