@@ -5,25 +5,27 @@ import matplotlib.pyplot as plt
 
 print("content-type:text/html; charset=UTF-8\n")
 
-print('Hello World!')
+# def make_circle(c, r):
+#     theta = np.linspace(0, 2 * np.pi, 256)
+#     x = r * np.cos(theta)
+#     y = r * np.sin(theta)    
+#     return np.vstack((x, y)).T + c
 
-def make_circle(c, r):
-    theta = np.linspace(0, 2 * np.pi, 256)
-    x = r * np.cos(theta)
-    y = r * np.sin(theta)    
-    return np.vstack((x, y)).T + c
+# c = np.array([2, 3])
+# r = 1.5
 
-c = np.array([2, 3])
-r = 1.5
+# circle = make_circle(c, r)
 
-circle = make_circle(c, r)
+# # circle 변수에서 20개 추출
+# idx = np.random.choice(len(circle), 15)
+# A = circle[idx]
 
-# circle 변수에서 20개 추출
-idx = np.random.choice(len(circle), 15)
-A = circle[idx]
+# # 가우시안 노이즈 추가
+# A = A + 0.09 * np.random.randn(A.shape[0], A.shape[1])
 
-# 가우시안 노이즈 추가
-A = A + 0.09 * np.random.randn(A.shape[0], A.shape[1])
+# 임의의 좌표 추가, ndarray 형식 변환
+data = [[1,1], [3, -1], [0, 4], [5, 6]]
+A = np.array(data)
 
 ones = np.ones((A.shape[0], 1))
 A = np.concatenate((ones, A), axis = 1)
@@ -45,9 +47,9 @@ print(x_c, y_c, r_c)
 
 fitted_circle = make_circle(np.array([x_c, y_c]), r_c)
 
-plt.figure(figsize = (12,4))
+# plt.figure(figsize = (12,4))
 
-# plt.figure(figsize = (4,4))
+plt.figure(figsize = (4,4))
 # plt.plot(circle[:,0], circle[:, 1], 'b-')
 # plt.scatter(x = A[:,0], y = A[:, 1], color = 'r')
 # plt.grid()
@@ -55,27 +57,27 @@ plt.figure(figsize = (12,4))
 # plt.ylim(0,5)
 # plt.show()
 
-plt.subplot(131)
-plt.plot(circle[:,0], circle[:, 1], 'b-', label = 'original_circle')
-plt.scatter(x = A[:,1], y = A[:, 2], color = 'r', label = 'sampled point')
-plt.grid()
-plt.xlim(0,5)
-plt.ylim(0,5)
+# plt.subplot(131)
+# plt.plot(circle[:,0], circle[:, 1], 'b-', label = 'original_circle')
+# plt.scatter(x = A[:,1], y = A[:, 2], color = 'r', label = 'sampled point')
+# plt.grid()
+# plt.xlim(0,5)
+# plt.ylim(0,5)
 
 plt.subplot(132)
 plt.plot(fitted_circle[:,0], fitted_circle[:, 1], 'y-', label = 'fitted_circle')
 plt.scatter(x = A[:,1], y = A[:, 2], color = 'r', label = 'sampled point')
 plt.grid()
-plt.xlim(0,5)
-plt.ylim(0,5)
+plt.xlim(0,20)
+plt.ylim(0,20)
 
-plt.subplot(133)
-plt.plot(circle[:,0], circle[:, 1], 'b-', label = 'original_circle')
-plt.plot(fitted_circle[:,0], fitted_circle[:, 1], 'y-', label = 'fitted_circle')
-plt.grid()
-plt.legend()
-plt.xlim(0,5)
-plt.ylim(0,5)
+# plt.subplot(133)
+# plt.plot(circle[:,0], circle[:, 1], 'b-', label = 'original_circle')
+# plt.plot(fitted_circle[:,0], fitted_circle[:, 1], 'y-', label = 'fitted_circle')
+# plt.grid()
+# plt.legend()
+# plt.xlim(0,5)
+# plt.ylim(0,5)
 
-plt.tight_layout()
+# plt.tight_layout()
 plt.show()
