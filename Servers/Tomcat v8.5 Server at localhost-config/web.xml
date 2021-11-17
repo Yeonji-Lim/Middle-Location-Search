@@ -446,7 +446,7 @@
 
     <servlet-mapping>
         <servlet-name>cgi</servlet-name>
-        <url-pattern>/cgi-bin/*</url-pattern>
+        <url-pattern>/cgi/*</url-pattern>
     </servlet-mapping>
 
 
