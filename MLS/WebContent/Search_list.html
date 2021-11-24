@@ -7,7 +7,7 @@
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:1000px;}
-#menu_wrap {position:absolute;top:0;right:0;bottom:0;width:400px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -56,16 +56,28 @@
             </div>
         </div>
         <hr>
+        <div>
+            <button id ="test1" type = "button">음식점</button>
+            <button id ="test2" type = "button">카페</button>
+            <button id ="test3" type = "button">문화시설</button>
+            <button id ="test4" type = "button">숙소</button>
+        </div>
+        <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
 </div>
-
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f"></script>
-	<script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f&libraries=services"></script>
+<script>
 // 마커를 담을 배열입니다
-var markers = [];
 
+
+
+var markers = [];
+var SearchBounds;
+var SearchX;
+var SearchY;
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -83,9 +95,7 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 키워드로 장소를 검색합니다
 searchPlaces();
-$(document).ready(function(){
-    $("#url").attr("href","https://www.naver.com")
-})
+
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
@@ -132,7 +142,8 @@ function displayPlaces(places) {
     fragment = document.createDocumentFragment(), 
     bounds = new kakao.maps.LatLngBounds(), 
     listStr = '';
-    
+    SearchX = places[0].x;
+    SearchY = places[0].y;
     // 검색 결과 목록에 추가된 항목들을 제거합니다
     removeAllChildNods(listEl);
 
@@ -145,7 +156,7 @@ function displayPlaces(places) {
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-        
+
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         bounds.extend(placePosition);
@@ -153,7 +164,7 @@ function displayPlaces(places) {
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function(marker, title,) {
+        (function(marker, title) {
             kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
             });
@@ -180,6 +191,7 @@ function displayPlaces(places) {
 
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     map.setBounds(bounds);
+    SearchBounds = bounds;
 }
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -188,18 +200,17 @@ function getListItem(index, places) {
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<div class="info">' +
-                '   <h5><a id="url" href="'+places.place_url+'">'+ places.place_name + '</a></h5>';
-                
-        
-        itemStr += '    <span>' + places.category_name + '</span>';
-        itemStr += '<span>'+places.category_group_name+'</span>';
-                 
-      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>';           
+                '   <h5>' + places.place_name + '</h5>';
+
+                itemStr += '    <span>' + places.category_name + '</span>';
+                itemStr += '<span>'+places.category_group_name+'</span>';
+                         
+              itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+                        '</div>';     
 
     el.innerHTML = itemStr;
     el.className = 'item';
-    
+
     return el;
 }
 
@@ -278,6 +289,21 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+ 
+$(document).ready(function() {
+    $("#test1").click(function() {
+        ps.categorySearch( 'FD6', placesSearchCB,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+})
+$("#test2").click(function() {
+        ps.categorySearch( 'CE7', placesSearchCB,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+})
+$("#test3").click(function() {
+        ps.categorySearch( 'CT1', placesSearchCB,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+})
+$("#test4").click(function() {
+        ps.categorySearch( 'AT4', placesSearchCB,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+})
+});
 </script>
 </body>
 </html>
