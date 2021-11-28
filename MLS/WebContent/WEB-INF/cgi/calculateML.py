@@ -1,14 +1,14 @@
 #!/usr/local/bin/python3
 
-# import cgi  # python을 cgi로 사용
-# import request  # 결과 post 
+print("content-type:text/html; charset=UTF-8\n")
+
+import cgi  # python을 cgi로 사용
+
 # import numpy as np
 # import matplotlib.pyplot as plt
 
-print("content-type:text/html; charset=UTF-8\n")
-
-# 원적합 확인을 위한 원 만드는 함수 
 """
+# 원적합 확인을 위한 원 만드는 함수 
 def make_circle(c, r):
     theta = np.linspace(0, 2 * np.pi, 256)
     x = r * np.cos(theta)
@@ -17,9 +17,8 @@ def make_circle(c, r):
 """
 
 # data from client
-# form = cgi.FieldStorage()
-# latlng = form["latlng"].value
-# print("test : {}".format(latlng))
+form = cgi.FieldStorage()
+latlng = form["latlng"].value
 
 # 임의의 좌표 추가, ndarray 형식 변환
 # data = [[1,1], [3, -1], [0, 4], [5, 6]]
@@ -68,7 +67,7 @@ print('''
 </head>
 <body>
 	<form name="hiden_form" action="./calculateML" method="POST">
-        <input type="hidden" name="latlng" value="1234"/>
+        <input type="hidden" name="latlng" value="{result}"/>
         <input type="submit" />
     </form>
 	<script>
@@ -76,4 +75,4 @@ print('''
 	</script>
 </body>
 </html>
-''')
+'''.format(result=latlng))
