@@ -399,7 +399,7 @@
   <!--                        reading of stderr to complete before          -->
   <!--                        terminating the CGI process. [2000]           -->
 
-<!--
+
     <servlet>
         <servlet-name>cgi</servlet-name>
         <servlet-class>org.apache.catalina.servlets.CGIServlet</servlet-class>
@@ -409,7 +409,7 @@
         </init-param>
         <load-on-startup>5</load-on-startup>
     </servlet>
--->
+
 
 
   <!-- ================ Built In Servlet Mappings ========================= -->
@@ -443,12 +443,12 @@
 
     <!-- The mapping for the CGI Gateway servlet -->
 
-<!--
+
     <servlet-mapping>
         <servlet-name>cgi</servlet-name>
-        <url-pattern>/cgi-bin/*</url-pattern>
+        <url-pattern>*.py</url-pattern>
     </servlet-mapping>
--->
+
 
 
   <!-- ================== Built In Filter Definitions ===================== -->
