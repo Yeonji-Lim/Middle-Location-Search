@@ -41,8 +41,11 @@ public class calculateML extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("hello");
-		String l = request.getParameter("latlng");
-		out.println(l);
+		String x = request.getParameter("x");
+		String y = request.getParameter("y");
+		String r = request.getParameter("r");
+
+		out.println("x : "+x+", y : "+y+", r : "+r);
 	}
 
 }
