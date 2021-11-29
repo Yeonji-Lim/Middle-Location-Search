@@ -157,20 +157,12 @@ input[type="radio"]{
     display: none;
 }
 
-input[type="radio"] + label{
-    height: 20px;
-    width: 40px;
-    background: blue;
-}
-
-input[type="radio"]:checked + label{
-    height: 20px;
-    width: 40px;
-    background: red;
-}
-
 li[class="item"]{
     background: yellow;
+}
+
+li[class="spot"]{
+    background: blue;
 }
 
 </style>
@@ -201,12 +193,10 @@ li[class="item"]{
 			<h3>장소 입력하기</h3>
 			<div id="spot_section">
                 <ul id="spot_list">
-                    <li>
-                        <input type="radio" name="spot" id="1check">
-                        <label for="1check">
-                            <span class="spot_num" id = "1">1</span> 
-                            <input type="text" class="search"placeholder="장소 입력"><input type="button" value="x">
-                        </label>
+                    <li class="spot">
+                        <input type="radio" name="spot">
+                        <span class="spot_num" id = "1">1</span> 
+                        <input type="text" class="search"placeholder="장소 입력"><input type="button" class="delete" value="x">
                     </li>
                 </ul>
             </div>
@@ -218,6 +208,8 @@ li[class="item"]{
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f&libraries=services"></script>
 <script>
+//TODO: li에 담겨있는 주소로 장소의 위도와 경도를 반환한다
+//https://apis.map.kakao.com/web/sample/addr2coord/
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -443,15 +435,26 @@ function removeAllChildNods(el) {
 <script>
     var num = 1;
     function create_spotbox(){
-        $("#spot_list").append("<li><input type='radio' name='spot' id='" + ++num + "check' class='radio'><label for = '" + num + "check'><span class='spot_num' id = '" + num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' value='x'></label></li>");
-    }
-    function delete_spotbox(){
-        var clickedID = $(this).attr('id');
-        $('#' + checkedID).remove();
+        $("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
     }
 
     function uncheck(){
         $("input:radio[name='spot']").prop('checked', false);
+        Uncheckedcolor();
+    }
+
+    function Uncheckedcolor(){
+        for(var i = 1; i <= num; i++){
+            $("span[id='" + i + "']").parent().css("background-color", "blue");
+        }
+    }
+
+    function spotIDreset(){
+        $('li.spot').each(function (index, item) {
+            console.log(index);
+            $(this).children('span').attr("id", index + 1);
+            $(this).children('span').text(index + 1);
+        });
     }
 
     $('html').click(function(e){
@@ -460,10 +463,23 @@ function removeAllChildNods(el) {
         }
     });
 
-    //TODO: 클릭이벤트 발생시키기 더블클릭해서 정보를 배열에 넣는것이 최종 목표
-    //동적 생성된 요소에 이벤트 처리
+    $(document).on("click", "li.spot", function(){
+        $(this).children('input:radio').prop('checked', true);
+        Uncheckedcolor();
+        $(this).css("background-color", "red");
+    });
+
     $(document).on("dblclick", "li.item", function(){
-        alert("real?");
+        if($("input:radio[name='spot']").is(':checked')){
+            var Name = $(this).children('.info').children('h5').text();
+            $("input[name='spot']:checked").siblings("input[class='search']").val(Name);
+        }
+    });
+
+    $(document).on("click", "input.delete", function(){
+        var H = $(this).parent().remove();
+        spotIDreset();
+        num--;
     });
 
 </script>
