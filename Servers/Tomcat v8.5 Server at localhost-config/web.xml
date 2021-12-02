@@ -400,7 +400,7 @@
   <!--                        terminating the CGI process. [2000]           -->
 
 
-    <servlet>
+<!--     <servlet>
         <servlet-name>cgi</servlet-name>
         <servlet-class>org.apache.catalina.servlets.CGIServlet</servlet-class>
         <init-param>
@@ -408,7 +408,7 @@
           <param-value>WEB-INF/cgi</param-value>
         </init-param>
         <load-on-startup>5</load-on-startup>
-    </servlet>
+    </servlet> -->
 
 
 
@@ -444,10 +444,10 @@
     <!-- The mapping for the CGI Gateway servlet -->
 
 
-    <servlet-mapping>
+<!--     <servlet-mapping>
         <servlet-name>cgi</servlet-name>
         <url-pattern>*.py</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 
 
 
