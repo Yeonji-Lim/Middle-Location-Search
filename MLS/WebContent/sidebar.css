@@ -245,3 +245,11 @@ div[class="R_sidebar"] {
 input[id="R_menuicon"]:checked+label+div {
     right: 0;
 }
+
+/*********임시**********/
+button[id="send_loc_box"] {
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    font-size: 15px;
+}

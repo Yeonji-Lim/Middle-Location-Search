@@ -35,6 +35,7 @@
         <div id="spot_section">            
         </div>
         <button type="button" onclick="create_spotbox()" id="plus_box">+</button>
+        <button type="button" onclick="show_mid_loc()" id="send_loc_box">중간장소 계산하기</button>
     </div>
 
     <input type="checkbox" id="R_menuicon">
@@ -48,6 +49,7 @@
     </div>
     </div>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f"></script>
     <script>
         var num_spot = 1;
@@ -101,11 +103,39 @@
         }
         */
 
+        var locations = new Array();
+        
         // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
             // 클릭한 위치에 마커를 표시합니다 
-            addMarker(mouseEvent.latLng);             
+            addMarker(mouseEvent.latLng);    
+            
+            /*************임시************/
+            //console.log(mouseEvent.latLng['La']);
+
+            var location = new Object();
+            
+            location.lat = mouseEvent.latLng['La'];
+            location.lng = mouseEvent.latLng['Ma'];
+
+            locations.push(location);
+
         });
+
+        function show_mid_loc() {
+            $.ajax({ 
+                type: POST, 
+                url : "/calculateML.py", 
+                data: JSON.stringify(locations), 
+                dataType:"json", 
+                success : function(data, status, xhr) { 
+                    console.log(data); 
+                }, 
+                error: function(jqXHR, textStatus, errorThrown) { 
+                    console.log(jqXHR.responseText); 
+                } 
+            });
+        }
 
         // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
         var markers = [];

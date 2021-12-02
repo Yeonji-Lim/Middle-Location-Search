@@ -3,22 +3,24 @@ package com.example.model;
 import Jama.Matrix;
 
 public class JamaExpert {
-	public double getResult(double x) {
+	public double getResult(double[][] x) {
 						
 		Matrix A = new Matrix(4, 3);
 		double ad[][] = A.getArray();
 		
 		for(int i = 0; i < 4; i++) {
 			ad[i][0] = 1;
+			ad[i][1] = x[i][0];
+			ad[i][2] = x[i][1];
 		}
-		ad[0][1] = 1;
-		ad[0][2] = 1;
-		ad[1][1] = 3;
-		ad[1][2] = -1;
-		ad[2][1] = 0;
-		ad[2][2] = 4;
-		ad[3][1] = 5;
-		ad[3][2] = 6;
+//		ad[0][1] = 1;
+//		ad[0][2] = 1;
+//		ad[1][1] = 3;
+//		ad[1][2] = -1;
+//		ad[2][1] = 0;
+//		ad[2][2] = 4;
+//		ad[3][1] = 5;
+//		ad[3][2] = 6;
 		
 		Matrix b = new Matrix(4, 1);
 		double ad2[][] = b.getArray();
