@@ -202,19 +202,18 @@ li[class="spot"]{
             </div>
 		</div>
         <button type="button" onclick="create_spotbox()" id="plus_box">+</button>
+        <button id = "submit" onclick = "makeJson()">제출</button>
     </div>
 
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f&libraries=services"></script>
 <script>
-//TODO: li에 담겨있는 주소로 장소의 위도와 경도를 반환한다
-//https://apis.map.kakao.com/web/sample/addr2coord/
 // 마커를 담을 배열입니다
 var markers = [];
 
-//개별장소를 넣을 배열입니다
-var spotPlaces = [];
+//TODO: 위치를 보내는 방식을 버튼을 클릭하는 순간 리스트에 장소가 들어가 있는 곳만의 위치를 반환한다.
+var spotPlaces = [""];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -231,8 +230,31 @@ var ps = new kakao.maps.services.Places();
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
+//개별장소 검색창의 갯수를 나타낸다.
+var num = 1;
+
 // 키워드로 장소를 검색합니다
 searchPlaces();
+
+//TODO:개별 장소를 다 콘솔에 출력하는 함수
+//json 형식의 데이터를 만드는 함수
+function makeJson(){
+    var positionJson;
+    positionJson = "["
+    for(var i = 0; i < spotPlaces.length; i++){
+        if(spotPlaces[i] != ""){
+            positionJson += ('{"lat": ' + spotPlaces[i].getLat() + ', "lng": ' + spotPlaces[i].getLng() + '},');
+        }
+    }
+    positionJson = positionJson.slice(0, -1);
+    positionJson += "]";
+    $.ajax({
+        type: "post",
+        url : "calcMLServlet",
+        data : positionJson,
+        success : function(data){},
+    })
+}
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -275,7 +297,6 @@ function placesSearchCB(data, status, pagination) {
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-
     var listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
     fragment = document.createDocumentFragment(), 
@@ -319,6 +340,19 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
+
+            //여기에 마우스 더블클릭 이벤트를 설정한다.
+            
+            itemEl.ondblclick = function(){
+                if($("input:radio[name='spot']").is(':checked')){
+                    var Name = $(this).children('.info').children('h5').text();
+                    $("input[name='spot']:checked").siblings("input[class='search']").val(Name);
+                    var positionSpot = marker.getPosition();
+                    var spot_index = $("input[name='spot']:checked").siblings("span[class='spot_num']").attr('id');
+                    spotPlaces[parseInt(spot_index)-1] = positionSpot;
+                }
+            };
+
         })(marker, places[i].place_name);
 
         fragment.appendChild(itemEl);
@@ -364,7 +398,7 @@ function addMarker(position, idx, title) {
             offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         },
         markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-            marker = new kakao.maps.Marker({
+        marker = new kakao.maps.Marker({
             position: position, // 마커의 위치
             image: markerImage 
         });
@@ -430,57 +464,49 @@ function removeAllChildNods(el) {
     }
 }
 
-</script>
+//검색창을 만들고 spotPlaces의 배열 요소를 하나 추가한다.
+function create_spotbox(){
+    $("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
+    spotPlaces.push("");
+}
 
-<script>
-    var num = 1;
-    function create_spotbox(){
-        $("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
+function uncheck(){
+    $("input:radio[name='spot']").prop('checked', false);
+    Uncheckedcolor();
+}
+
+function Uncheckedcolor(){
+    for(var i = 1; i <= num; i++){
+        $("span[id='" + i + "']").parent().css("background-color", "blue");
     }
+}
 
-    function uncheck(){
-        $("input:radio[name='spot']").prop('checked', false);
-        Uncheckedcolor();
+function spotIDreset(){
+    $('li.spot').each(function (index, item) {
+        $(this).children('span').attr("id", index + 1);
+        $(this).children('span').text(index + 1);
+    });
+}
+
+$('html').click(function(e){
+    if($(e.target).hasClass("L_sidebar")){
+        uncheck();
     }
+});
 
-    function Uncheckedcolor(){
-        for(var i = 1; i <= num; i++){
-            $("span[id='" + i + "']").parent().css("background-color", "blue");
-        }
-    }
+$(document).on("click", "li.spot", function(){
+    $(this).children('input:radio').prop('checked', true);
+    Uncheckedcolor();
+    $(this).css("background-color", "red");
+});
 
-    function spotIDreset(){
-        $('li.spot').each(function (index, item) {
-            console.log(index);
-            $(this).children('span').attr("id", index + 1);
-            $(this).children('span').text(index + 1);
-        });
-    }
-
-    $('html').click(function(e){
-        if($(e.target).hasClass("L_sidebar")){
-            uncheck();
-        }
-    });
-
-    $(document).on("click", "li.spot", function(){
-        $(this).children('input:radio').prop('checked', true);
-        Uncheckedcolor();
-        $(this).css("background-color", "red");
-    });
-
-    $(document).on("dblclick", "li.item", function(){
-        if($("input:radio[name='spot']").is(':checked')){
-            var Name = $(this).children('.info').children('h5').text();
-            $("input[name='spot']:checked").siblings("input[class='search']").val(Name);
-        }
-    });
-
-    $(document).on("click", "input.delete", function(){
-        var H = $(this).parent().remove();
-        spotIDreset();
-        num--;
-    });
+$(document).on("click", "input.delete", function(){
+    var H = $(this).parent().remove();
+    var Del_num = $(this).siblings('span').attr('id');
+    spotPlaces.splice(Del_num-1, 1);
+    spotIDreset();
+    num--;
+});
 
 </script>
 </body>
