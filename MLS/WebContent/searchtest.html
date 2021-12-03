@@ -243,14 +243,17 @@ var midPlace = {
 
 //TODO:개별 장소를 다 콘솔에 출력하는 함수
 //json 형식의 데이터를 만드는 함수
+//TODO: 조건문으로 spotPlaces에 ""인 요소는 걸러야함
 function show_ML(){
 
     var spotPlacesJson = [];
     for(var i = 0; i < spotPlaces.length; i++) {
-        spotPlacesJson.push({ 
-            lat : spotPlaces[i].getLat(),
-            lng : spotPlaces[i].getLng()
-        });
+        if(spotPlaces[i] != ""){
+            spotPlacesJson.push({ 
+                lat : spotPlaces[i].getLat(),
+                lng : spotPlaces[i].getLng()
+            });
+        }
     }
 
     $.ajax({
