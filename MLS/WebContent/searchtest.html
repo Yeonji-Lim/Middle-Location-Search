@@ -234,29 +234,37 @@ var num = 1;
 // 키워드로 장소를 검색합니다
 searchPlaces();
 
+// 중간장소 저장, isNull이 true이면 아직 계산하지 않은 상태
+var midPlace={
+        y : 0,
+        x : 0,
+        isNull : true
+    };
+
 //TODO:개별 장소를 다 콘솔에 출력하는 함수
 //json 형식의 데이터를 만드는 함수
 function show_ML(){
 
-    var loc_list = [];
+    var spotPlacesJson = [];
     for(var i = 0; i < spotPlaces.length; i++) {
-        loc_list.push({ 
+        spotPlacesJson.push({ 
             lat : spotPlaces[i].getLat(),
             lng : spotPlaces[i].getLng()
         });
     }
 
-    var positionJson = JSON.stringify(loc_list);
-    var mid_loc = [];
-
     $.ajax({
         type: "post",
         url : "calcMLServlet",
-        data : {locations : positionJson},
+        data : {locations : JSON.stringify(spotPlacesJson)},
         success : function(data){
             //console.log(data);
 
-            var midLocPosition = new kakao.maps.LatLng(data["lat"], data["lng"]);
+            midPlace.y = data["lat"];
+            midPlace.x = data["lng"];
+            midPlace.isNull = false;
+
+            var midLocPosition = new kakao.maps.LatLng(midPlace.y, midPlace.x);
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
