@@ -50,7 +50,7 @@ public class calcMLServlet extends HttpServlet {
 		
 		JamaExpert j = new JamaExpert();
 		double[] result = j.calculateML(data);
-		out.println("{ \"x\" : "+result[0]+", \"y\" : "+result[1]+"}");
+		out.println("{ \"lat\" : "+result[0]+", \"lng\" : "+result[1]+"}");
 	}
 
 }

@@ -200,7 +200,7 @@
             </div>
 		</div>
         <button type="button" onclick="create_spotbox()" id="plus_box">+</button>
-        <button type="button" onclick="makeJson()" id="submit">제출</button>
+        <button type="button" onclick="show_ML()" id="submit">중간장소보기</button>
     </div>
 
 </div>
@@ -236,7 +236,7 @@ searchPlaces();
 
 //TODO:개별 장소를 다 콘솔에 출력하는 함수
 //json 형식의 데이터를 만드는 함수
-function makeJson(){
+function show_ML(){
 
     var loc_list = [];
     for(var i = 0; i < spotPlaces.length; i++) {
@@ -247,18 +247,39 @@ function makeJson(){
     }
 
     var positionJson = JSON.stringify(loc_list);
+    var mid_loc = [];
 
     $.ajax({
         type: "post",
         url : "calcMLServlet",
         data : {locations : positionJson},
         success : function(data){
-            console.log(data);
+            //console.log(data);
+
+            var midLocPosition = new kakao.maps.LatLng(data["lat"], data["lng"]);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: midLocPosition
+            });
+
+            map.setCenter(midLocPosition);
+
         },
         error: function(e) {
             alert("에러발생");
         }
     })
+}
+
+// 마커를 생성하고 지도위에 표시하는 함수입니다
+function addMarker(position) {
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: position
+    });
 }
 
 // 키워드 검색을 요청하는 함수입니다
