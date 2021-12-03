@@ -156,8 +156,8 @@
         function show_mid_loc() {
             $.ajax({ 
                 type: POST, 
-                url : "/calculateML.py", 
-                data: JSON.stringify(locations), 
+                url : "/calcMLServlet", 
+                data: {locations : JSON.stringify(locations)}, 
                 dataType:"json", 
                 success : function(data, status, xhr) { 
                     console.log(data); 
@@ -180,8 +180,8 @@
             // 마커를 생성합니다
             var marker = new kakao.maps.Marker({
                 position: position
-    };
-
+            });
+        }
 
     // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 
