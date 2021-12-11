@@ -44,7 +44,28 @@
       <span></span>
     </label>
     <div class="R_sidebar">
-
+		    <div id="menu_wrap" class="bg_white">
+		        <div class="option">
+		            <div>
+		                <form onsubmit="searchPlaces(); return false;">
+		                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+		                    <button type="submit">검색하기</button> 
+		                </form>
+		            </div>
+		        </div>
+		        <hr>
+		        <div>
+		            <button id ="test1" type = "button">음식점</button>
+		            <button id ="test2" type = "button">카페</button>
+		            <button id ="test3" type = "button">문화시설</button>
+		            <button id ="test4" type = "button">숙소</button>
+		        </div>
+		        <hr>
+		        <ul id="placesList"></ul>
+			</div>
+			<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9519a3a3b045964f59f79d575c08a44f&libraries=services"></script>
+		<script type="text/javascript" src="MapJS.js"></script>
     </div>
     </div>
 
