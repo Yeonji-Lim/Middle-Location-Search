@@ -39,6 +39,33 @@
         #placesList .item .marker_13 {background-position: 0 -562px;}
         #placesList .item .marker_14 {background-position: 0 -608px;}
         #placesList .item .marker_15 {background-position: 0 -654px;}
+
+        #placesList2 {text-align: left;}
+        #placesList2 li {list-style: none;}
+        #placesList2 .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+        #placesList2 .item span {display: block;margin-top:4px;}
+        #placesList2 .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+        #placesList2 .item .info{padding:10px 0 10px 55px;}
+        #placesList2 .info .gray {color:#8a8a8a;}
+        #placesList2 .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+        #placesList2 .info .tel {color:#009900;}
+        #placesList2 .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+        #placesList2 .item .marker_1 {background-position: 0 -10px;}
+        #placesList2 .item .marker_2 {background-position: 0 -56px;}
+        #placesList2 .item .marker_3 {background-position: 0 -102px}
+        #placesList2 .item .marker_4 {background-position: 0 -148px;}
+        #placesList2 .item .marker_5 {background-position: 0 -194px;}
+        #placesList2 .item .marker_6 {background-position: 0 -240px;}
+        #placesList2 .item .marker_7 {background-position: 0 -286px;}
+        #placesList2 .item .marker_8 {background-position: 0 -332px;}
+        #placesList2 .item .marker_9 {background-position: 0 -378px;}
+        #placesList2 .item .marker_10 {background-position: 0 -423px;}
+        #placesList2 .item .marker_11 {background-position: 0 -470px;}
+        #placesList2 .item .marker_12 {background-position: 0 -516px;}
+        #placesList2 .item .marker_13 {background-position: 0 -562px;}
+        #placesList2 .item .marker_14 {background-position: 0 -608px;}
+        #placesList2 .item .marker_15 {background-position: 0 -654px;}
+
         #pagination {margin:10px auto;text-align: center;}
         #pagination a {display:inline-block;margin-right:10px;}
         #pagination .on {font-weight: bold; cursor: default;color:#777;}
@@ -293,13 +320,21 @@
     </div>
 
     <input type="checkbox" id="R_menuicon">
+
     <label for="R_menuicon">
         <span></span> <span></span> <span></span>
 	</label>
+
     <div class="R_sidebar">
         <div class="loginUI">
-
         </div>
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+            </div>
+            <hr>
+            <ul class="placesList2"></ul>
+        </div>
+        <div id="pagination"></div>
     </div>
 </div>
 
@@ -310,6 +345,9 @@ var markers = [];
 
 //TODO: 위치를 보내는 방식을 버튼을 클릭하는 순간 리스트에 장소가 들어가 있는 곳만의 위치를 반환한다.
 var spotPlaces = [""];
+
+// 개인 장소 마커
+var spotmarkerList = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -395,7 +433,6 @@ function show_ML(){
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position) {
-    
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         position: position
@@ -405,7 +442,6 @@ function addMarker(position) {
 //TODO: 주소 검색이 되지만 주서만으로 하면 안될거 같다 키워드와 주소가 같이 검색할 수 있으면 좋겠다.
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
-
     var keyword = document.getElementById('keyword').value;
 
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -415,7 +451,7 @@ function searchPlaces() {
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB);
-    수업
+    
     // 장소검색 객체를 통해 주소로 장소검색을 요청합니다
     geocoder.addressSearch( keyword, placesSearchCB);
 }
@@ -445,7 +481,7 @@ function placesSearchCB(data, status, pagination) {
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-    var listEl = document.getElementById('placesList'), 
+    var listEl = document.getElementById('placesList'),
     menuEl = document.getElementById('menu_wrap'),
     fragment = document.createDocumentFragment(), 
     bounds = new kakao.maps.LatLngBounds(), 
@@ -490,14 +526,28 @@ function displayPlaces(places) {
             };
 
             //여기에 마우스 더블클릭 이벤트를 설정한다.
-            
+            //TODO: 여기에 spotmarker이 구현되어있음 리스트에 해당 마커를 지우고 새로운 장소의 마커를 표시한다
             itemEl.ondblclick = function(){
                 if($("input:radio[name='spot']").is(':checked')){
                     var Name = $(this).children('.info').children('h5').text();
                     $("input[name='spot']:checked").siblings("input[class='search']").val(Name);
                     var positionSpot = marker.getPosition();
                     var spot_index = $("input[name='spot']:checked").siblings("span[class='spot_num']").attr('id');
+
+                    //해당 개인 장소 칸에 다른 장소가 있으면 해당 장소의 마커를 지운다.
+                    if(spotmarkerList[parseInt(spot_index)-1] != null)
+                        spotmarker.setMap(null);
+
                     spotPlaces[parseInt(spot_index)-1] = positionSpot;
+
+                    //개인 장소를 마커에 표시한다.
+                    spotmarker = new kakao.maps.Marker({
+                        map: map,
+                        position: positionSpot
+                    });
+
+                    //새로운 장소의 마커객체를 대입한다.
+                    spotmarkerList[parseInt(spot_index)-1] = spotmarker;
                 }
             };
 
@@ -616,6 +666,8 @@ function removeAllChildNods(el) {
 function create_spotbox(){
     $("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
     spotPlaces.push("");
+    //TODO: 개인장소 마커 리스트를 늘린다.
+    spotmarkerList.push("");
 }
 
 function uncheck(){
@@ -652,6 +704,7 @@ $(document).on("click", "input.delete", function(){
     var H = $(this).parent().remove();
     var Del_num = $(this).siblings('span').attr('id');
     spotPlaces.splice(Del_num-1, 1);
+    spotmarkerList.splice(Del_num-1, 1);
     spotIDreset();
     num--;
 });
