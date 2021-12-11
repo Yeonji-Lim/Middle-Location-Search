@@ -377,8 +377,8 @@ var SearchY;
 //TODO: 위치를 보내는 방식을 버튼을 클릭하는 순간 리스트에 장소가 들어가 있는 곳만의 위치를 반환한다.
 var spotPlaces = [""];
 
-// 개인 장소 마커
-var spotmarkerList = [];
+// TODO:개인 장소 마커
+var spotmarkerList = [""];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -417,6 +417,7 @@ var midPlace = {
     isNull : true
 };
 
+//FIXME: 2개 지점일 때 위치가 이상하게 찍힌다.
 function show_ML(){
 
     var spotPlacesJson = [];
@@ -426,9 +427,8 @@ function show_ML(){
                 lat : spotPlaces[i].getLat(),
                 lng : spotPlaces[i].getLng()
             });
-            console.log(spotPlaces[i].getLat() + ", " + spotPlaces[i].getLng());
+            console.log("spot : " + (i + 1) + spotPlaces[i].getLat() + ", " + spotPlaces[i].getLng())
         }
-        
     }
 
     $.ajax({
@@ -452,7 +452,7 @@ function show_ML(){
                 map: map,
                 position: midLocPosition
             });
-
+            console.log("result : " + midLocPosition.getLat() + ", " + midLocPosition.getLng())
             map.setCenter(midLocPosition);
             
         },
@@ -625,21 +625,28 @@ function displayPlaces(places) {
             //TODO: 여기에 spotmarker이 구현되어있음 리스트에 해당 마커를 지우고 새로운 장소의 마커를 표시한다
             itemEl.ondblclick = function(){
                 if($("input:radio[name='spot']").is(':checked')){
+                    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+                        imageSize = new kakao.maps.Size(64, 69),
+                        imageOption = {offset: new kakao.maps.Point(27, 69)};
+                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
                     var Name = $(this).children('.info').children('h5').text();
                     $("input[name='spot']:checked").siblings("input[class='search']").val(Name);
                     var positionSpot = marker.getPosition();
                     var spot_index = $("input[name='spot']:checked").siblings("span[class='spot_num']").attr('id');
 
                     //해당 개인 장소 칸에 다른 장소가 있으면 해당 장소의 마커를 지운다.
-                    if(spotmarkerList[parseInt(spot_index)-1] != null)
-                        spotmarker.setMap(null);
+                    if(spotmarkerList[parseInt(spot_index)-1] !== "")
+                        spotmarkerList[parseInt(spot_index)-1].setMap(null);
 
                     spotPlaces[parseInt(spot_index)-1] = positionSpot;
 
+                    //TODO: 여기를 고쳐야함
                     //개인 장소를 마커에 표시한다.
                     spotmarker = new kakao.maps.Marker({
                         map: map,
-                        position: positionSpot
+                        position: positionSpot,
+                        image: markerImage
                     });
 
                     //새로운 장소의 마커객체를 대입한다.
@@ -844,6 +851,7 @@ function removeAllChildNods(el) {
 function create_spotbox(){
     $("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
     spotPlaces.push("");
+
     //TODO: 개인장소 마커 리스트를 늘린다.
     spotmarkerList.push("");
 }
