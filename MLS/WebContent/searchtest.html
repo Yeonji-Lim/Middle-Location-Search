@@ -281,11 +281,15 @@
             border-style: solid;
             text-align: center;
         }
-
+        
         /*left sidebar checked*/
         input[id="R_menuicon"]:checked+label+div {
             right: 0;
         }
+        div[id="loginAfter"]{
+            visibility: hidden;
+        }
+
 
     </style>
 </head>
@@ -333,6 +337,12 @@
             <span></span> <span></span> <span></span>
         </label>
         <div class="R_sidebar">
+            <div id ="loginBefore">
+                <button type="button" onclick="loginPopup();">버튼</button>
+            </div>
+            <div id = "loginAfter">
+                <h1 id = "name"></h1>
+            </div>
             <div>
                 <form onsubmit="searchPlaces2(); return false;">
                     키워드 : <input type="text" value="이태원 맛집" id="keyword2" size="15"> 
@@ -444,12 +454,30 @@ function show_ML(){
             });
 
             map.setCenter(midLocPosition);
-
+            
         },
         error: function(e) {
             alert("에러발생");
         }
     })
+}
+
+function displayMLlist(){
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    var coord = new kakao.maps.LatLng(37.56496830314491, 126.93990862062978);
+    var callback = function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
+        }
+    };
+
+    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+
+}
+
+function loginPopup(){
+    window.open("login.html","a","width=500,height=350,top=350,left=1000");
 }
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
@@ -458,6 +486,20 @@ function addMarker(position) {
     var marker = new kakao.maps.Marker({
         position: position
     });
+}
+
+function testalert(name, id){
+    var loginAfter = document.getElementById('loginAfter');
+    var loginBefore = document.getElementById('loginBefore');
+    var n = document.getElementById('name');
+    sessionStorage.setItem('name',name);
+    sessionStorage.setItem('id',id);
+    n.textContent = name;
+
+    loginAfter.style.visibility = 'visible';
+    loginBefore.style.visibility = 'hidden';
+    alert(sessionStorage.getItem("name"));
+    alert('asdf');
 }
 
 //TODO: 주소 검색이 되지만 주서만으로 하면 안될거 같다 키워드와 주소가 같이 검색할 수 있으면 좋겠다.
@@ -796,6 +838,8 @@ function removeAllChildNods(el) {
     }
 }
 
+
+
 //검색창을 만들고 spotPlaces의 배열 요소를 하나 추가한다.
 function create_spotbox(){
     $("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
@@ -857,6 +901,9 @@ $("#test4").click(function() {
         ps.categorySearch( 'AT4', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
 })
 });
+
+
+
 
 </script>
 </body>
