@@ -19,6 +19,7 @@
 	Boolean flag = false;
 	String id = null;
 	String name = null;
+	String user_num = null;
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
@@ -37,12 +38,14 @@
 		flag = true;
 		id = rs.getString("id");
 		name = rs.getString("name");
+		user_num = rs.getString("num");
 	}
 	
 	if(flag)
 	{
 		session.setAttribute("id", id);
 		session.setAttribute("name", name);
+		session.setAttribute("user_num", user_num);
 		%>
 
                     <%=name%>님 로그인을 환영합니다.

@@ -348,8 +348,6 @@
             </div>
             <div id = "loginAfter">
                 <h1 id = "name"></h1>
-                <button type="button" onclick="">중간 장소 내역보기</button><br>
-                
                 <a href="logout.jsp">로그아웃</a>
             </div>
             <div id="menu_wrap2" class="bg_white">
@@ -376,6 +374,8 @@ var markers = [];
 var SearchBounds;
 var SearchX;
 var SearchY;
+var user_num;
+var MLlocation = [];
 
 //TODO: 위치를 보내는 방식을 버튼을 클릭하는 순간 리스트에 장소가 들어가 있는 곳만의 위치를 반환한다.
 var spotPlaces = [""];
@@ -435,8 +435,8 @@ function show_ML(){
         }
     }
         
-    var user_id = <%=session.getAttribute("id")%>;
-    if(user_id == null) {
+    var user_id = '<%=session.getAttribute("id")%>';
+    if(user_id == "null") {
     	user_id = 0;
     }
     console.log("user_id : "+user_id)
@@ -471,6 +471,14 @@ function show_ML(){
             SearchX = midLocPosition.getLat();
             SearchY = midLocPosition.getLng();
             ps.categorySearch( 'FD6', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+
+            if(user_num != "null")
+            {
+                var stemp = displayMLlist(midLocPosition);
+                MLlocation.push(stemp);
+                
+            }
+
         },
         error: function(e) {
             alert("에러발생");
@@ -506,10 +514,12 @@ function addMarker(position) {
     });
 }
 
+
 function testalert(){
     var loginAfter = document.getElementById('loginAfter');
     var loginBefore = document.getElementById('loginBefore');
     var n = document.getElementById('name');
+    user_num = '<%=session.getAttribute("user_num") %>';
     n.textContent = '<%=session.getAttribute("name") %>';
 
     loginAfter.style.visibility = 'visible';
