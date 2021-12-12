@@ -57,10 +57,8 @@
 		</script>
 		<%
 	}
-	
 
 %>
-
 
 </body>
 </html>

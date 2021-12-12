@@ -418,6 +418,7 @@ var midPlace = {
 };
 
 //FIXME: 2개 지점일 때 위치가 이상하게 찍힌다.
+
 function show_ML(){
 
     var spotPlacesJson = [];
@@ -431,13 +432,21 @@ function show_ML(){
         }
     }
     console.log("spotPlacesJson : "+spotPlacesJson.length)
+        
+    var user_id = session.getAttribute("id");
+    if(user_id == null) {
+    	user_id = 0;
+    }
 
     $.ajax({
         type: "post",
         url : "calcMLServlet",
-        data : {locations : JSON.stringify(spotPlacesJson)},
+        data : {
+	        	user_id : user_id, 
+	        	locations : JSON.stringify(spotPlacesJson)
+        	},
         success : function(data){
-            //console.log(data);
+            console.log(data);
 
             midPlace.y = data["lat"];
             midPlace.x = data["lng"];

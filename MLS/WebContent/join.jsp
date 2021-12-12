@@ -20,7 +20,6 @@
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");
 	
-	
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
@@ -29,11 +28,15 @@
 		sql = "select * from member where id='"+id+"'";			//아이디 이미 회원
 		rs = stmt.executeQuery(sql);
 	}
-	catch(Exception e)
-	{
-		out.println("DB연동 오류입니다.:"+e.getMessage());
+	catch(ClassNotFoundException ex){
+		out.println("드라이버 검색 실패");
+		ex.printStackTrace();
 	}
-	if(rs.next())
+	catch(SQLException e) {
+		e.printStackTrace();
+	}
+	
+	if(rs != null && rs.next())
 	{
 		flag = true;
 	}
