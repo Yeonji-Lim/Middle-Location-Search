@@ -343,12 +343,7 @@
             <div id = "loginAfter">
                 <h1 id = "name"></h1>
             </div>
-            <div>
-                <form onsubmit="searchPlaces2(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword2" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
+ 
             <div id="menu_wrap2" class="bg_white">
                 <div class="option">
                 </div>
@@ -533,18 +528,6 @@ function searchPlaces() {
     
     // 장소검색 객체를 통해 주소로 장소검색을 요청합니다
     geocoder.addressSearch( keyword, placesSearchCB);
-}
-
-function searchPlaces2() {
-    var keyword = document.getElementById('keyword2').value;
-
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-        return false;
-    }
-
-    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-    ps.keywordSearch( keyword, placesSearchCB2);
 }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -900,6 +883,7 @@ $(document).on("click", "li.spot", function(){
     $(this).css("background-color", "red");
 });
 
+//TODO: 검색창을 삭제할 때 마커도 사라지게 해야함
 $(document).on("click", "input.delete", function(){
     var H = $(this).parent().remove();
     var Del_num = $(this).siblings('span').attr('id');
@@ -912,16 +896,16 @@ $(document).on("click", "input.delete", function(){
 $(document).ready(function() {
     $("#test1").click(function() {
         ps.categorySearch( 'FD6', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
-$("#test2").click(function() {
-        ps.categorySearch( 'CE7', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
-$("#test3").click(function() {
-        ps.categorySearch( 'CT1', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
-$("#test4").click(function() {
-        ps.categorySearch( 'AT4', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
+    })
+    $("#test2").click(function() {
+            ps.categorySearch( 'CE7', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+    })
+    $("#test3").click(function() {
+            ps.categorySearch( 'CT1', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+    })
+    $("#test4").click(function() {
+            ps.categorySearch( 'AT4', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+    })
 });
 
 
