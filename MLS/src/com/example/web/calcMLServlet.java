@@ -47,6 +47,19 @@ public class calcMLServlet extends HttpServlet {
 		
 //		double [][] data = new double[arr.size()][2];
 		
+		if(arr.size() == 1) {
+			obj = (JSONObject)arr.get(0);
+			out.println("{ \"lat\" : "+(double)obj.get("lat")+", \"lng\" : "+(double)obj.get("lng")+"}");
+		}
+		
+		if(arr.size() == 2) {
+			obj = (JSONObject)arr.get(0);
+			JSONObject obj2 = (JSONObject)arr.get(0);
+			double x = (double)obj.get("lat") - (double)obj2.get("lat");
+			double y = (double)obj.get("lng") - (double)obj2.get("lng");
+			out.println("{ \"lat\" : "+x+", \"lng\" : "+y+"}");
+		}
+		
 		List<Point> points = new ArrayList<>();
 		Point p = null;
 		
