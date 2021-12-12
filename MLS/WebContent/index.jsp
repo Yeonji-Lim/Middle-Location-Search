@@ -311,7 +311,7 @@
         <div class="L_sidebar">
             <div id="mainsearch">
                 <form onsubmit="searchPlaces(); return false;">
-                    <input id = "searchBar"type="text" value="서울특별시 중구 필동로 1길 30" id="keyword" size="15"> 
+                    <input type="text" value="서울특별시 중구 필동로 1길 30" id="keyword" size="15"> 
                     <button type="submit">검색</button> 
                 </form>
             </div>
@@ -348,6 +348,9 @@
             </div>
             <div id = "loginAfter">
                 <h1 id = "name"></h1>
+                <button type="button" onclick="">중간 장소 내역보기</button><br>
+                
+                <a href="logout.jsp">로그아웃</a>
             </div>
             <div id="menu_wrap2" class="bg_white">
                 <div class="option">
@@ -478,22 +481,21 @@ function show_ML(){
 function displayMLlist(mLocation){
     var geocoder = new kakao.maps.services.Geocoder();
 
-    var coord = new kakao.maps.LatLng(37.56496830314491, 126.93990862062978);
+    var coord = new kakao.maps.LatLng(mLocation.getLat(),mLocation.getLng());
     var callback = function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            alert(result[0].address.address_name);
-            console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
-            //geocoder.addressSearch( result[0].address.address_name, placesSearchCB);
-
+            return result[0].address.address_name;
         }
     };
-    alert(mLocation.getLat());
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-
 }
 
 function loginPopup(){
     window.open("login.html","a","width=500,height=350,top=350,left=1000");
+}
+
+function MLlistPopup(){
+    window.open("showList.html","a","width=500,height=600,top=150,left=1000");
 }
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
@@ -504,19 +506,16 @@ function addMarker(position) {
     });
 }
 
-function testalert(name, id){
+function testalert(){
     var loginAfter = document.getElementById('loginAfter');
     var loginBefore = document.getElementById('loginBefore');
     var n = document.getElementById('name');
-    sessionStorage.setItem('name',name);
-    sessionStorage.setItem('id',id);
-    n.textContent = name;
+    n.textContent = '<%=session.getAttribute("name") %>';
 
     loginAfter.style.visibility = 'visible';
     loginBefore.style.visibility = 'hidden';
-    alert(sessionStorage.getItem("name"));
-    alert('asdf');
 }
+
 
 //TODO: 주소 검색이 되지만 주서만으로 하면 안될거 같다 키워드와 주소가 같이 검색할 수 있으면 좋겠다.
 // 키워드 검색을 요청하는 함수입니다
@@ -769,7 +768,7 @@ function getListItem2(index, places) {
 var el = document.createElement('li'),
 itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
             '<div class="info">' +
-            '   <h5>' + places.place_name + '</h5>';
+            '   <h5>' +'<a href="'+places.place_url+'" target="_blank">'+ places.place_name +'</a>'+'</h5>';
 
             itemStr += '    <span>' + places.category_name + '</span>';
             itemStr += '<span>'+places.category_group_name+'</span>';
