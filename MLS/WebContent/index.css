@@ -1,0 +1,594 @@
+@charset "EUC-KR";
+
+        html,
+        body {
+            height: 100%;
+        }
+        
+        .map_wrap,
+        .map_wrap * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Malgun Gothic', dotum, 'µ¸¿ò', sans-serif;
+            font-size: 12px;
+        }
+        .map_wrap a,
+        .map_wrap a:hover,
+        .map_wrap a:active {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .map_wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #menu_wrap {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            width: 375px;
+            height: 500px;
+            margin-left: 10px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+            font-size: 12px;
+            border-radius: 10px;
+            overflow-y: scroll;
+        }
+        
+        .bg_white {
+            background: #fff;
+        }
+        
+        #menu_wrap hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 2px solid #5F5F5F;
+            margin: 3px 0;
+        }
+        
+        #menu_wrap .option {
+            text-align: center;
+        }
+        
+        #menu_wrap .option p {
+            margin: 10px 0;
+        }
+        
+        #menu_wrap .option button {
+            margin-left: 5px;
+        }
+        
+        #placesList {
+            text-align: left;
+        }
+        
+        #placesList li {
+            list-style: none;
+        }
+        
+        #placesList .item {
+            position: relative;
+            border-bottom: 1px solid #888;
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 65px;
+        }
+        
+        #placesList .item span {
+            display: block;
+            margin-top: 4px;
+        }
+        
+        #placesList .item h5,
+        #placesList .item .info {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        #placesList .item .info {
+            padding: 10px 0 10px 55px;
+        }
+        
+        #placesList .info .gray {
+            color: #8a8a8a;
+        }
+        
+        #placesList .info .jibun {
+            padding-left: 26px;
+            background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+        }
+        
+        #placesList .info .tel {
+            color: #009900;
+        }
+        
+        #placesList .item .markerbg {
+            float: left;
+            position: absolute;
+            width: 36px;
+            height: 37px;
+            margin: 10px 0 0 10px;
+            background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+        }
+        
+        #placesList .item .marker_1 {
+            background-position: 0 -10px;
+        }
+        
+        #placesList .item .marker_2 {
+            background-position: 0 -56px;
+        }
+        
+        #placesList .item .marker_3 {
+            background-position: 0 -102px
+        }
+        
+        #placesList .item .marker_4 {
+            background-position: 0 -148px;
+        }
+        
+        #placesList .item .marker_5 {
+            background-position: 0 -194px;
+        }
+        
+        #placesList .item .marker_6 {
+            background-position: 0 -240px;
+        }
+        
+        #placesList .item .marker_7 {
+            background-position: 0 -286px;
+        }
+        
+        #placesList .item .marker_8 {
+            background-position: 0 -332px;
+        }
+        
+        #placesList .item .marker_9 {
+            background-position: 0 -378px;
+        }
+        
+        #placesList .item .marker_10 {
+            background-position: 0 -423px;
+        }
+        
+        #placesList .item .marker_11 {
+            background-position: 0 -470px;
+        }
+        
+        #placesList .item .marker_12 {
+            background-position: 0 -516px;
+        }
+        
+        #placesList .item .marker_13 {
+            background-position: 0 -562px;
+        }
+        
+        #placesList .item .marker_14 {
+            background-position: 0 -608px;
+        }
+        
+        #placesList .item .marker_15 {
+            background-position: 0 -654px;
+        }
+        
+        #menu_wrap2 {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            width: 390px;
+            height: 800px;
+            margin-left: 10px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+            font-size: 12px;
+            border-radius: 10px;
+            overflow-y: scroll;
+        }
+        
+        .bg_white {
+            background: #fff;
+        }
+        
+        #menu_wrap2 hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 2px solid #5F5F5F;
+            margin: 3px 0;
+        }
+        
+        #menu_wrap2 .option {
+            text-align: center;
+        }
+        
+        #menu_wrap2 .option p {
+            margin: 10px 0;
+        }
+        
+        #menu_wrap2 .option button {
+            margin-left: 5px;
+        }
+        
+        input[id="searchBar"] {
+            width: 300px;
+            height: 30px;
+            font-size: 25px;
+        }
+        
+        *[id="placesList2"] {
+            text-align: left;
+        }
+        
+        *[id="placesList2"] li {
+            list-style: none;
+        }
+        
+        *[id="placesList2"] .item {
+            position: relative;
+            border-bottom: 1px solid #888;
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 65px;
+        }
+        
+        *[id="placesList2"] .item span {
+            display: block;
+            margin-top: 4px;
+        }
+        
+        *[id="placesList2"] .item h5,
+        *[id="placesList2"] .item .info {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        *[id="placesList2"] .item .info {
+            padding: 10px 0 10px 55px;
+        }
+        
+        *[id="placesList2"] .info .gray {
+            color: #8a8a8a;
+        }
+        
+        *[id="placesList2"] .info .jibun {
+            padding-left: 26px;
+            background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+        }
+        
+        *[id="placesList2"] .info .tel {
+            color: #009900;
+        }
+        
+        *[id="placesList2"] .item .markerbg {
+            float: left;
+            position: absolute;
+            width: 36px;
+            height: 37px;
+            margin: 10px 0 0 10px;
+            background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+        }
+        
+        *[id="placesList2"] .item .marker_1 {
+            background-position: 0 -10px;
+        }
+        
+        *[id="placesList2"] .item .marker_2 {
+            background-position: 0 -56px;
+        }
+        
+        *[id="placesList2"] .item .marker_3 {
+            background-position: 0 -102px
+        }
+        
+        *[id="placesList2"] .item .marker_4 {
+            background-position: 0 -148px;
+        }
+        
+        *[id="placesList2"] .item .marker_5 {
+            background-position: 0 -194px;
+        }
+        
+        *[id="placesList2"] .item .marker_6 {
+            background-position: 0 -240px;
+        }
+        
+        *[id="placesList2"] .item .marker_7 {
+            background-position: 0 -286px;
+        }
+        
+        *[id="placesList2"] .item .marker_8 {
+            background-position: 0 -332px;
+        }
+        
+        *[id="placesList2"] .item .marker_9 {
+            background-position: 0 -378px;
+        }
+        
+        *[id="placesList2"] .item .marker_10 {
+            background-position: 0 -423px;
+        }
+        
+        *[id="placesList2"] .item .marker_11 {
+            background-position: 0 -470px;
+        }
+        
+        *[id="placesList2"] .item .marker_12 {
+            background-position: 0 -516px;
+        }
+        
+        *[id="placesList2"] .item .marker_13 {
+            background-position: 0 -562px;
+        }
+        
+        *[id="placesList2"] .item .marker_14 {
+            background-position: 0 -608px;
+        }
+        
+        *[id="placesList2"] .item .marker_15 {
+            background-position: 0 -654px;
+        }
+        
+        #pagination {
+            margin: 10px auto;
+            text-align: center;
+        }
+        
+        #pagination a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        #pagination .on {
+            font-weight: bold;
+            cursor: default;
+            color: #777;
+        }
+        
+        input[id="L_menuicon"] {
+            display: none;
+        }
+        /*left menu icon box position*/
+        
+        input[id="L_menuicon"]+label {
+            display: block;
+            width: 60px;
+            height: 100px;
+            position: fixed;
+            left: 0;
+            top: calc(50% - 25px);
+            cursor: pointer;
+            transition: all.35s;
+            border-style: solid;
+            border-width: 2px;
+            z-index: 2;
+            background-color: white;
+        }
+        /*left icon shape*/
+        
+        input[id="L_menuicon"]+label span {
+            display: block;
+            position: absolute;
+            width: 90%;
+            height: 5px;
+            border-radius: 30px;
+            background: #000;
+            transition: all.35s;
+            z-index: 2;
+            left: 5%;
+        }
+        
+        input[id="L_menuicon"]+label span:nth-child(1) {
+            top: 25%;
+        }
+        
+        input[id="L_menuicon"]+label span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        input[id="L_menuicon"]+label span:nth-child(3) {
+            bottom: 25%;
+        }
+        /*left icon checked*/
+        
+        input[id="L_menuicon"]:checked+label {
+            z-index: 2;
+            left: 402px;
+        }
+        
+        input[id="L_menuicon"]:checked+label span {
+            background: #000;
+        }
+        
+        input[id="L_menuicon"]:checked+label span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        input[id="L_menuicon"]:checked+label span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        input[id="L_menuicon"]:checked+label span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+        /*left sidebar shape and position*/
+        
+        div[class="L_sidebar"] {
+            width: 400px;
+            height: 100%;
+            background: white;
+            position: fixed;
+            top: 0;
+            left: -400px;
+            z-index: 2;
+            transition: all .35s;
+            border-width: 2px;
+            border-color: black;
+            border-style: solid;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+        }
+        
+        div[class="L_sidebar"]::-webkit-scrollbar {
+            display: none;
+        }
+        
+        div[class="L_sidebar"] {
+            text-align: center;
+        }
+        /*subsearch*/
+        
+        div[id="subsearch"] {
+            height: 300px;
+            overflow-y: scroll;
+        }
+        /*left sidebar checked*/
+        
+        input[id="L_menuicon"]:checked+label+div {
+            left: 0;
+        }
+        
+        input[type="radio"] {
+            display: none;
+        }
+        
+        li[class="item"] {
+            background: white;
+        }
+        
+        li[class="spot"] {
+            margin: 5px;
+            border: 1px solid;
+        }
+        /*right menuicon*/
+        
+        input[id="R_menuicon"] {
+            display: none;
+        }
+        /*right menu icon box position*/
+        
+        input[id="R_menuicon"]+label {
+            display: block;
+            width: 60px;
+            height: 100px;
+            position: fixed;
+            right: 0;
+            top: calc(50% - 25px);
+            cursor: pointer;
+            transition: all.35s;
+            border-style: solid;
+            border-width: 2px;
+            z-index: 2;
+            background-color: white;
+        }
+        /*right icon shape*/
+        
+        input[id="R_menuicon"]+label span {
+            display: block;
+            position: absolute;
+            width: 90%;
+            height: 5px;
+            border-radius: 30px;
+            background: #000;
+            transition: all.35s;
+            z-index: 2;
+            left: 5%;
+        }
+        
+        input[id="R_menuicon"]+label span:nth-child(1) {
+            top: 25%;
+        }
+        
+        input[id="R_menuicon"]+label span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        input[id="R_menuicon"]+label span:nth-child(3) {
+            bottom: 25%;
+        }
+        /*right icon checked*/
+        
+        input[id="R_menuicon"]:checked+label {
+            z-index: 2;
+            right: 402px;
+        }
+        
+        input[id="R_menuicon"]:checked+label span {
+            background: #000;
+        }
+        
+        input[id="R_menuicon"]:checked+label span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        input[id="R_menuicon"]:checked+label span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        input[id="R_menuicon"]:checked+label span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+        /*right sidebar shape and position*/
+        
+        div[class="R_sidebar"] {
+            width: 400px;
+            height: 100%;
+            background: white;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            z-index: 2;
+            transition: all .35s;
+            border-width: 2px;
+            border-color: black;
+            border-style: solid;
+            text-align: center;
+        }
+        /*left sidebar checked*/
+        
+        input[id="R_menuicon"]:checked+label+div {
+            right: 0;
+        }
+        
+        div[id="loginAfter"] {
+            visibility: hidden;
+        }
+        
+        input[id="keyword"] {
+            width: 80%;
+            height: 30px;
+            font-size: 20px;
+        }
+        
+        div[id="mainsearch"] {
+            padding: 10px;
+        }
+        
+        ul[id="spot_list"] {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            list-style: none;
+        }
+        
+        div[id="loginBefore"] {
+            height: 50px;
+        }
+        
+        div[id="loginBefore"] button {
+            margin-top: 15px;
+        }
