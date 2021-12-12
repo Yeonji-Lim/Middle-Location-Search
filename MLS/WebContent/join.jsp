@@ -22,7 +22,7 @@
 	
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://18.222.142.248:3306/mls?useUnicode=true&characterEncoding=euc-kr";
+		String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
 		conn = DriverManager.getConnection(url,"root","0000");
 		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		sql = "select * from member where id='"+id+"'";			//아이디 이미 회원

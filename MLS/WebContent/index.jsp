@@ -11,7 +11,7 @@
         .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
         .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
         .map_wrap {position:relative;width:100%;height:100%;}
-        #menu_wrap {position:relative;top:0;bottom:0;width:300px;height:500px;margin-left:75px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;overflow-y:scroll;}
+        #menu_wrap {position:relative;top:0;bottom:0;width:375px;height:500px;margin-left:10px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;overflow-y:scroll;}
         .bg_white {background:#fff;}
         #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
         #menu_wrap .option{text-align: center;}
@@ -43,13 +43,17 @@
         #placesList .item .marker_14 {background-position: 0 -608px;}
         #placesList .item .marker_15 {background-position: 0 -654px;}
 
-        #menu_wrap2 {position:relative;top:0;bottom:0;width:300px;height:500px;margin-left:75px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;overflow-y:scroll;}
+        #menu_wrap2 {position:relative;top:0;bottom:0;width:390px;height:800px;margin-left:10px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;overflow-y:scroll;}
         .bg_white {background:#fff;}
         #menu_wrap2 hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
         #menu_wrap2 .option{text-align: center;}
         #menu_wrap2 .option p {margin:10px 0;}  
         #menu_wrap2 .option button {margin-left:5px;}
-
+        input[id="searchBar"]{
+            width: 300px;
+            height: 30px;
+            font-size: 25px;
+        }
         *[id="placesList2"] {text-align: left;}
         *[id="placesList2"] li {list-style: none;}
         *[id="placesList2"] .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
@@ -307,8 +311,8 @@
         <div class="L_sidebar">
             <div id="mainsearch">
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="서울특별시 중구 필동로 1길 30" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
+                    <input id = "searchBar"type="text" value="서울특별시 중구 필동로 1길 30" id="keyword" size="15"> 
+                    <button type="submit">검색</button> 
                 </form>
             </div>
             <div id="menu_wrap" class="bg_white">
@@ -344,12 +348,6 @@
             </div>
             <div id = "loginAfter">
                 <h1 id = "name"></h1>
-            </div>
-            <div>
-                <form onsubmit="searchPlaces2(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword2" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
             </div>
             <div id="menu_wrap2" class="bg_white">
                 <div class="option">
