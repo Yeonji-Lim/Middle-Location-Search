@@ -454,7 +454,10 @@ function show_ML(){
             });
             console.log("result : " + midLocPosition.getLat() + ", " + midLocPosition.getLng())
             map.setCenter(midLocPosition);
-            
+            displayMLlist(midLocPosition);
+            SearchX = midLocPosition.getLat();
+            SearchY = midLocPosition.getLng();
+            ps.categorySearch( 'FD6', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
         },
         error: function(e) {
             alert("에러발생");
@@ -462,16 +465,19 @@ function show_ML(){
     })
 }
 
-function displayMLlist(){
+function displayMLlist(mLocation){
     var geocoder = new kakao.maps.services.Geocoder();
 
     var coord = new kakao.maps.LatLng(37.56496830314491, 126.93990862062978);
     var callback = function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
+            alert(result[0].address.address_name);
             console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
+            //geocoder.addressSearch( result[0].address.address_name, placesSearchCB);
+
         }
     };
-
+    alert(mLocation.getLat());
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 
 }
