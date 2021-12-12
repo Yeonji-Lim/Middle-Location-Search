@@ -20,7 +20,7 @@
         <div class="L_sidebar">
             <div id="mainsearch">
                 <form onsubmit="searchPlaces(); return false;">
-                    <input type="text" value="서울특별시 중구 필동로 1길 30" id="keyword" size="15"> 
+                    <input type="text" value="동대입구역" id="keyword" size="15"> 
                     <button type="submit">검색</button> 
                 </form>
             </div>
