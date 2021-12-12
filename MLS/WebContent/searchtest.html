@@ -430,6 +430,7 @@ function show_ML(){
             console.log("spot : " + (i + 1) + spotPlaces[i].getLat() + ", " + spotPlaces[i].getLng())
         }
     }
+    console.log("spotPlacesJson : "+spotPlacesJson.length)
 
     $.ajax({
         type: "post",

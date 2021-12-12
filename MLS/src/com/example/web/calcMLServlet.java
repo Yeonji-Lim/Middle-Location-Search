@@ -44,40 +44,25 @@ public class calcMLServlet extends HttpServlet {
 		     System.out.println("변환에 실패");
 		     e.printStackTrace();
 		}
-		
-//		double [][] data = new double[arr.size()][2];
-		
-		if(arr.size() == 1) {
-			obj = (JSONObject)arr.get(0);
-			out.println("{ \"lat\" : "+(double)obj.get("lat")+", \"lng\" : "+(double)obj.get("lng")+"}");
-		}
-		
-		if(arr.size() == 2) {
-			obj = (JSONObject)arr.get(0);
-			JSONObject obj2 = (JSONObject)arr.get(0);
-			double x = (double)obj.get("lat") - (double)obj2.get("lat");
-			double y = (double)obj.get("lng") - (double)obj2.get("lng");
-			out.println("{ \"lat\" : "+x+", \"lng\" : "+y+"}");
-		}
-		
+				
 		List<Point> points = new ArrayList<>();
 		Point p = null;
 		
 		for(int i = 0; i < arr.size(); i++) {
 			obj = (JSONObject)arr.get(i);
-//			data[i][0] = (double)obj.get("lat");
-//			data[i][1] = (double)obj.get("lng");
 			
 			p = new Point((double)obj.get("lat"), (double)obj.get("lng"));
 			points.add(p);
 		}
 		
-//		JamaExpert j = new JamaExpert();
-//		double[] result = j.calculateML(data);
-		
-		SmallestCircle expert = new SmallestCircle();
-		Circle resultCircle = expert.makeCircle(points);
-		p = resultCircle.c;
+		if(points.size()==2) {
+			p.x = (points.get(0).x + p.x)/2;
+			p.y = (points.get(0).y + p.y)/2;
+		} else if(points.size()!=1){
+			SmallestCircle expert = new SmallestCircle();
+			Circle resultCircle = expert.makeCircle(points);
+			p = resultCircle.c;
+		}
 		
 		out.println("{ \"lat\" : "+p.x+", \"lng\" : "+p.y+"}");
 	}
