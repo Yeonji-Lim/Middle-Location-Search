@@ -842,6 +842,7 @@ $(document).on("click", "li.spot", function(){
     $(this).css("background-color", "red");
 });
 
+//TODO: 검색창을 삭제할 때 마커도 사라지게 해야함
 $(document).on("click", "input.delete", function(){
     var H = $(this).parent().remove();
     var Del_num = $(this).siblings('span').attr('id');
@@ -854,16 +855,16 @@ $(document).on("click", "input.delete", function(){
 $(document).ready(function() {
     $("#test1").click(function() {
         ps.categorySearch( 'FD6', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
-$("#test2").click(function() {
-        ps.categorySearch( 'CE7', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
-$("#test3").click(function() {
-        ps.categorySearch( 'CT1', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
-$("#test4").click(function() {
-        ps.categorySearch( 'AT4', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
-})
+    })
+    $("#test2").click(function() {
+            ps.categorySearch( 'CE7', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+    })
+    $("#test3").click(function() {
+            ps.categorySearch( 'CT1', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+    })
+    $("#test4").click(function() {
+            ps.categorySearch( 'AT4', placesSearchCB2,{location: new kakao.maps.LatLng(SearchX,SearchY), bounds:SearchBounds}); 
+    })
 });
 
 </script>
