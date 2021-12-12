@@ -50,7 +50,7 @@
 
                     <%=name%>님 로그인을 환영합니다.
 
-                        <input type="button" value="창닫기" onclick="opener.testalert('<%=name%>','<%=id%>');">
+                        <input type="button" value="로그인적용" onclick="opener.testalert('<%=name%>','<%=id%>');">
 
                         <%
 	}
