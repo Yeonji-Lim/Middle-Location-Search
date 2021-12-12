@@ -62,6 +62,6 @@
 	}
 
 %>
-</body>
-</html>
+            </body>
 
+            </html>
