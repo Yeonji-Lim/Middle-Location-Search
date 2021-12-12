@@ -680,8 +680,6 @@ menuEl = document.getElementById('menu_wrap2'),
 fragment = document.createDocumentFragment(), 
 bounds = new kakao.maps.LatLngBounds(), 
 listStr = '';
-SearchX = places[0].x;
-SearchY = places[0].y;
 // 검색 결과 목록에 추가된 항목들을 제거합니다
 removeAllChildNods(listEl);
 
@@ -729,7 +727,7 @@ menuEl.scrollTop = 0;
 
 // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 map.setBounds(bounds);
-SearchBounds = bounds;
+
 }
 
 
