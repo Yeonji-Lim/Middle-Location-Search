@@ -80,7 +80,7 @@ public class calcMLServlet extends HttpServlet {
 			try{
 				Class.forName("com.mysql.jdbc.Driver");
 				String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
-				conn = DriverManager.getConnection(url,"root","12345678");
+				conn = DriverManager.getConnection(url,"root","0000");
 				sql = "select * from midloc where user_id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, user_id);

@@ -32,7 +32,7 @@
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
-		conn = DriverManager.getConnection(url,"root","12345678");
+		conn = DriverManager.getConnection(url,"root","0000");
 		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 		sql = "select * from member where id='"+request.getParameter("id")+ "' AND pw='"+request.getParameter("pw")+"'";
 		rs = stmt.executeQuery(sql);
@@ -58,15 +58,7 @@
 		%>
         <%=name%>님 로그인을 환영합니다.
 		<script>
-        	
-			opener.document.getElementById('name').textContent = name;
-			opener.document.getElementById('opener_user_id').value = user_num;
-			opener.document.getElementById('opener_id').value = id;
 			send(name,user_num,id);
-			sessionStorage.setItem('id',id);
-			sessionStorage.setItem('user_num',user_num);
-			
-			
 		</script>
         <input type="button" value="로그인적용" onclick="opener.testalert('<%=name%>','<%=user_num%>','<%=id%>');">
         <%
