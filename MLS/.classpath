@@ -7,8 +7,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/GitHub/Middle-Location-Search/MLS/WebContent/WEB-INF/lib/Jama-1.0.3.jar"/>
-	<classpathentry kind="lib" path="D:/GitHub/Middle-Location-Search/MLS/WebContent/WEB-INF/lib/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/GitHub/Middle-Location-Search/MLS/WebContent/WEB-INF/lib/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/GitHub/Middle-Location-Search/MLS/WebContent/WEB-INF/lib/Jama-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/GitHub/Middle-Location-Search/MLS/WebContent/WEB-INF/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/GitHub/Middle-Location-Search/MLS/WebContent/WEB-INF/lib/mysql-connector-java-8.0.27.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -179,9 +179,15 @@ function show_ML(){
             midLocPosition = new kakao.maps.LatLng(midPlace.y, midPlace.x);
 
             // 결과값으로 받은 위치를 마커로 표시합니다
+            var imageSrc = './image/yello.png', // 마커이미지의 주소입니다    
+                        imageSize = new kakao.maps.Size(30, 45),
+                        imageOption = {offset: new kakao.maps.Point(27, 69)};
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
             Midmarker = new kakao.maps.Marker({
                 map: map,
-                position: midLocPosition
+                position: midLocPosition,
+                image: markerImage
             });
             console.log("result : " + midLocPosition.getLat() + ", " + midLocPosition.getLng())
             map.setCenter(midLocPosition);
@@ -372,8 +378,8 @@ function displayPlaces(places) {
             //TODO: 여기에 spotmarker이 구현되어있음 리스트에 해당 마커를 지우고 새로운 장소의 마커를 표시한다
             itemEl.ondblclick = function(){
                 if($("input:radio[name='spot']").is(':checked')){
-                    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-                        imageSize = new kakao.maps.Size(64, 69),
+                    var imageSrc = './image/red.png', // 마커이미지의 주소입니다    
+                        imageSize = new kakao.maps.Size(30, 45),
                         imageOption = {offset: new kakao.maps.Point(27, 69)};
                     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
