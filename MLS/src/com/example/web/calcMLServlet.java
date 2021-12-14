@@ -45,7 +45,6 @@ public class calcMLServlet extends HttpServlet {
 		
 		JSONObject obj = null;
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
-		int dbresult = 0;
 		 
 		try {
 		     arr = (JSONArray)parser.parse(request.getParameter("locations"));
@@ -75,7 +74,6 @@ public class calcMLServlet extends HttpServlet {
 		
 		if(user_id != 0) {
 			Connection conn=null;
-//			PreparedStatement pstmt = null;
 			Statement stmt = null;
 			String sql = null;
 
@@ -86,11 +84,6 @@ public class calcMLServlet extends HttpServlet {
 				sql = "insert into midloc(lat, lng, user_id) values("+p.x+", "+p.y+", "+user_id+")";
 				stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				stmt.executeUpdate(sql);
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setDouble(1, p.x);
-//				pstmt.setDouble(2, p.y);
-//				pstmt.setInt(3, user_id);
-//				dbresult = pstmt.executeUpdate(sql);
 			}
 			catch(ClassNotFoundException ex){
 				out.println("드라이버 검색 실패");
@@ -99,8 +92,7 @@ public class calcMLServlet extends HttpServlet {
 			catch(SQLException e) {
 				e.printStackTrace();
 			}
-			
-			
+
 		}
 		
 		out.println("{ \"user_id\" : "+user_id+",\"lat\" : "+p.x+", \"lng\" : "+p.y+"}");
