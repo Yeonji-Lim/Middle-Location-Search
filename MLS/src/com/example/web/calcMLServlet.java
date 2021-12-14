@@ -80,7 +80,7 @@ public class calcMLServlet extends HttpServlet {
 			try{
 				Class.forName("com.mysql.jdbc.Driver");
 				String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
-				conn = DriverManager.getConnection(url,"root","0000");
+				conn = DriverManager.getConnection(url,"root","12345678");
 				sql = "insert into midloc(lat, lng, user_id) values("+p.x+", "+p.y+", "+user_id+")";
 				stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				stmt.executeUpdate(sql);
