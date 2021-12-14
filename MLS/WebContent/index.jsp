@@ -56,7 +56,7 @@
                 <button type="button" onclick="loginPopup();">로그인</button>
             </div>
             <div id = "loginAfter">
-                <h1 id = "name"></h1>
+                <h1 id = "name" value =""></h1>
                 <a href="logout.jsp">로그아웃</a>
             </div>
             <div id="menu_wrap2" class="bg_white">
@@ -73,6 +73,10 @@
                 <ul id="placesList2" class = "placesList"></ul>
             </div>
             <div id="pagination"></div>
+        </div>
+        <div>
+            <input type="hidden" id="opener_user_id"value="">
+            <input type="hidden" id="opener_id"value="">
         </div>
     </div>
 
@@ -144,8 +148,9 @@ function show_ML(){
         }
     }
         
-    var user_id = '<%=session.getAttribute("user_num")%>';
-    if(user_id == "null") {
+    var user_id = document.getElementById('opener_user_id').value;
+    alert(user_id);
+    if(user_id == "") {
     	user_id = "0";
     }
     console.log("typeof user_id : "+typeof(user_id))
@@ -222,13 +227,16 @@ function addMarker(position) {
 }
 
 
-function testalert(){
+function testalert(_name,_user_id,_id){
     var loginAfter = document.getElementById('loginAfter');
     var loginBefore = document.getElementById('loginBefore');
     var n = document.getElementById('name');
+    var u = document.getElementById('opener_user_id');
+    var i = document.getElementById('opener_id');
+    u.value = _user_id;
+    i.value = _id;
     user_num = '<%=session.getAttribute("user_num") %>';
-    n.textContent = '<%=session.getAttribute("name") %>';
-
+    n.value = _name;
     loginAfter.style.visibility = 'visible';
     loginBefore.style.visibility = 'hidden';
 }

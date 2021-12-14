@@ -9,7 +9,16 @@
         <meta charset="utf-8">
         <title>Insert title here</title>
     </head>
+	<script>
+		function send(_name,_user_num,_id){
+			alert("asdfaa");
+			opener.document.getElementById('name').textContent = _name;
+			opener.document.getElementById('opener_user_id').value = _user_num;
+			opener.document.getElementById('opener_id').value = _id;
+			alert("asdf");
+		}
 
+	</script>
     <body>
         <%
 	Connection conn=null;
@@ -48,7 +57,18 @@
 		session.setAttribute("user_num", user_num);
 		%>
         <%=name%>님 로그인을 환영합니다.
-        <input type="button" value="로그인적용" onclick="opener.testalert('<%=name%>','<%=id%>');">
+		<script>
+        	
+			opener.document.getElementById('name').textContent = name;
+			opener.document.getElementById('opener_user_id').value = user_num;
+			opener.document.getElementById('opener_id').value = id;
+			send(name,user_num,id);
+			sessionStorage.setItem('id',id);
+			sessionStorage.setItem('user_num',user_num);
+			
+			
+		</script>
+        <input type="button" value="로그인적용" onclick="opener.testalert('<%=name%>','<%=user_num%>','<%=id%>');">
         <%
 	}
 	else
