@@ -620,6 +620,8 @@ $(document).on("click", "input.delete", function(){
     var H = $(this).parent().remove();
     var Del_num = $(this).siblings('span').attr('id');
     spotPlaces.splice(Del_num-1, 1);
+    if(spotmarkerList[Del_num-1] !== "")
+        spotmarkerList[Del_num-1].setMap(null);
     spotmarkerList.splice(Del_num-1, 1);
     spotIDreset();
     num--;
