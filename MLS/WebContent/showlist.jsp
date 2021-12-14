@@ -13,19 +13,20 @@
 <script>
 
 </script>
+<div id ="text"></div>
+
 <script type="text/javascript">
 	var list = "<h1>중간장소리스트</h1>";
+    var callback = function(result, status) {
+        if (status == kakao.maps.services.Status.OK) {
+        	list += "<h3>"+result[0].address.address_name +"</h3>";
+        }
+    };
 	function displayMLlist(_x,_y){
 	    var geocoder = new kakao.maps.services.Geocoder();
 		
 	    var coord = new kakao.maps.LatLng(_x,_y);
-	    var callback = function(result, status) {
-	        if (status == kakao.maps.services.Status.OK) {
-	        	console.log(typeof(result[0].address.address_name));
-	        	list += "<h3>"+result[0].address.address_name +"</h3>";
-	        	console.log(list);
-	        }
-	    };
+
 	    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 	}
 </script>
@@ -63,9 +64,15 @@
 	}
 	%>
 	<script>
+	function a()
+	{
 		console.log(list);
 		console.log(typeof(list));
-		document.write(list);
+		var text = document.getElementById("text");
+		list +="<a href='index.jsp'>지도로 돌아가기</a>";
+		text.innerHTML = list; 
+	}
+		setTimeout(a, 1000);
 	</script>
 	
 	
