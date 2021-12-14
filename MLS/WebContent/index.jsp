@@ -57,6 +57,11 @@
             </div>
             <div id = "loginAfter">
                 <h1 id = "name" value =""></h1>
+                <form action = "showlist.jsp" method="post">
+                    <input type="hidden" id="uid" name="user_id" value="">
+                    <input type="hidden" id="uname" name="name" value="">
+                    <input type="submit" value="중간장소 내역보기">
+                </form>
                 <a href="logout.jsp">로그아웃</a>
             </div>
             <div id="menu_wrap2" class="bg_white">
@@ -232,10 +237,13 @@ function testalert(_name,_user_id,_id){
     var n = document.getElementById('name');
     var u = document.getElementById('opener_user_id');
     var i = document.getElementById('opener_id');
+    var showlist = document.getElementById('uid');
+    var uname = document.getElementById('uname');
+    uname = _name;
+    showlist.value = _user_id;
     u.value = _user_id;
     i.value = _id;
-    user_num = '<%=session.getAttribute("user_num") %>';
-    n.value = _name;
+    n.textContent = _name;
     loginAfter.style.visibility = 'visible';
     loginBefore.style.visibility = 'hidden';
 }
