@@ -69,7 +69,6 @@
 		console.log(list);
 		console.log(typeof(list));
 		var text = document.getElementById("text");
-		list +="<a href='index.jsp'>지도로 돌아가기</a>";
 		text.innerHTML = list; 
 	}
 		setTimeout(a, 1000);

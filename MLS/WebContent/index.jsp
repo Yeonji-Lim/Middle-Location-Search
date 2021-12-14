@@ -57,10 +57,11 @@
             </div>
             <div id = "loginAfter">
                 <h1 id = "name" value =""></h1>
-                <form action = "showlist.jsp" method="post">
+                <form id ="showlist" action = "showlist.jsp" method="post">
                     <input type="hidden" id="uid" name="user_id" value="">
                     <input type="hidden" id="uname" name="name" value="">
-                    <input type="submit" value="중간장소 내역보기">
+                    <input type="button" onclick="listPopup();"value="중간장소 내역보기">
+                    
                 </form>
                 <a href="logout.jsp">로그아웃</a>
             </div>
@@ -225,7 +226,19 @@ function displayMLlist(mLocation){
 function loginPopup(){
     window.open("login.html","a","width=500,height=350,top=350,left=1000");
 }
-
+function listPopup(){
+	//window.open("showlist.jsp","a","width=500,height=350,top=350,left=1000");
+	
+	   var pop_title = "popupOpener" ;
+       
+       window.open("", pop_title,"width=500,height=800,top=350,left=1000") ;
+       var frmData = document.getElementById('showlist');
+       frmData.target = pop_title ;
+       frmData.action = "showlist.jsp" ;
+        
+       frmData.submit() ;
+       
+}
 
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
