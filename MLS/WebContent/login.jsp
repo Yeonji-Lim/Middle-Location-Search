@@ -23,7 +23,7 @@
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
-		conn = DriverManager.getConnection(url,"root","0000");
+		conn = DriverManager.getConnection(url,"root","12345678");
 		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 		sql = "select * from member where id='"+request.getParameter("id")+ "' AND pw='"+request.getParameter("pw")+"'";
 		rs = stmt.executeQuery(sql);
