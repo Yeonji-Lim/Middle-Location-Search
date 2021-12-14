@@ -144,17 +144,17 @@ function show_ML(){
         }
     }
         
-    var user_id = '<%=session.getAttribute("id")%>';
+    var user_id = '<%=session.getAttribute("user_num")%>';
     if(user_id == "null") {
-    	user_id = 0;
+    	user_id = "0";
     }
-    console.log("user_id : "+user_id)
+    console.log("typeof user_id : "+typeof(user_id))
 
     $.ajax({
         type: "post",
         url : "calcMLServlet",
         data : {
-	        	user_id : user_id, 
+        		user_id : user_id,
 	        	locations : JSON.stringify(spotPlacesJson)
         	},
         success : function(data){
