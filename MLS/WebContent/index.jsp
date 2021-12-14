@@ -149,7 +149,6 @@ function show_ML(){
     }
         
     var user_id = document.getElementById('opener_user_id').value;
-    alert(user_id);
     if(user_id == "") {
     	user_id = "0";
     }

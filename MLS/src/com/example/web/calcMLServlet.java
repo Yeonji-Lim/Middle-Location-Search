@@ -23,7 +23,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.example.model.Circle;
-import com.example.model.JamaExpert;
 import com.example.model.SmallestCircle;
 import com.example.model.Point;
 
@@ -39,10 +38,8 @@ public class calcMLServlet extends HttpServlet {
 		
 		response.setContentType("application/x-json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
 		JSONParser parser = new JSONParser();
 		JSONArray arr = null;
-		
 		JSONObject obj = null;
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		 
@@ -74,16 +71,26 @@ public class calcMLServlet extends HttpServlet {
 		
 		if(user_id != 0) {
 			Connection conn=null;
+			PreparedStatement pstmt = null;
 			Statement stmt = null;
+			ResultSet rs = null;
 			String sql = null;
+			boolean insert = true; 
 
 			try{
 				Class.forName("com.mysql.jdbc.Driver");
 				String url = "jdbc:mysql://localhost:3306/mls?serverTimezone=UTC";
 				conn = DriverManager.getConnection(url,"root","12345678");
-				sql = "insert into midloc(lat, lng, user_id) values("+p.x+", "+p.y+", "+user_id+")";
-				stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-				stmt.executeUpdate(sql);
+				sql = "select * from midloc where user_id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, user_id);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					if(rs.getDouble("lat")==p.x && rs.getDouble("lng")==p.y) {
+						insert = false;
+					}
+				}
 			}
 			catch(ClassNotFoundException ex){
 				out.println("드라이버 검색 실패");
@@ -92,9 +99,19 @@ public class calcMLServlet extends HttpServlet {
 			catch(SQLException e) {
 				e.printStackTrace();
 			}
-
+			
+			if(insert) {
+				try{
+					sql = "insert into midloc(lat, lng, user_id) values("+p.x+", "+p.y+", "+user_id+")";
+					stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+					stmt.executeUpdate(sql);
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
-		
 		out.println("{ \"user_id\" : "+user_id+",\"lat\" : "+p.x+", \"lng\" : "+p.y+"}");
 		
 	}
