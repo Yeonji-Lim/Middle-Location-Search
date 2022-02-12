@@ -518,7 +518,7 @@ function removeAllChildNods(el) {
 
 // 검색창을 만들고 spotPlaces의 배열 요소를 하나 추가
 function create_spotbox() {
-	$("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "'>" + num + "</span> <input type='text' class='search'placeholder='장소 입력'><input type='button' class='delete' value='x'></li>");
+	$("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "' style='margin: 10px;'>" + num + "</span> <input type='text' class='spot_textfield' placeholder='장소 입력'><input type='button' class='delete button sml_button' value='x'></li>");
 	spotPlaces.push("");
 
 	//TODO: 개인장소 마커 리스트를 늘린다.
@@ -552,7 +552,7 @@ $('html').click(function(e) {
 $(document).on("click", "li.spot", function() {
 	$(this).children('input:radio').prop('checked', true);
 	Uncheckedcolor();
-	$(this).css("background-color", "gray");
+	$(this).css("background-color", "rgb(230, 230, 230)");
 });
 
 $(document).on("click", "input.delete", function() {
