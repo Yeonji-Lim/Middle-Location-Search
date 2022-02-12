@@ -55,7 +55,7 @@
         </label>
         <div class="R_sidebar">
             <div id ="loginBefore">
-                <button type="button" onclick="loginPopup();">로그인</button>
+                <button type="button" onclick="loginPopup();" class="button">로그인</button>
             </div>
             <div id="loginAfter">
                 <h1 id="name"></h1>
@@ -68,14 +68,11 @@
                 <a href="logout.jsp">로그아웃</a>
             </div>
             <div id="menu_wrap2" class="bg_white">
-                <div class="option">
-                </div>
-                <hr>
-                <div>
-                    <button id="test1" type="button">음식점</button>
-                    <button id="test2" type="button">카페</button>
-                    <button id="test3" type="button">문화시설</button>
-                    <button id="test4" type="button">숙소</button>
+                <div id="category">
+                    <button id="test1" type="button" class="button">음식점</button>
+                    <button id="test2" type="button" class="button">카페</button>
+                    <button id="test3" type="button" class="button">문화시설</button>
+                    <button id="test4" type="button" class="button">숙소</button>
                 </div>
                 <hr>
                 <ul id="placesList2" class="placesList"></ul>

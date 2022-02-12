@@ -196,12 +196,12 @@ button{
 }
 
 #menu_wrap2 {
+	margin: 10px auto;
     position: relative;
     top: 0;
     bottom: 0;
     width: 390px;
     height: 800px;
-    margin-left: 10px;
     overflow-y: auto;
     background: rgba(255, 255, 255, 0.7);
     z-index: 1;
@@ -215,29 +215,14 @@ button{
 }
 
 #menu_wrap2 hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 2px solid #5F5F5F;
     margin: 3px 0;
 }
 
-#menu_wrap2 .option {
-    text-align: center;
-}
-
-#menu_wrap2 .option p {
-    margin: 10px 0;
-}
-
-#menu_wrap2 .option button {
-    margin-left: 5px;
-}
-
-input[id="searchBar"] {
-    width: 300px;
-    height: 30px;
-    font-size: 25px;
+#category {
+	margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 *[id="placesList2"] {
@@ -586,6 +571,12 @@ div[class="R_sidebar"] {
 }
 /*left sidebar checked*/
 
+div[class="R_sidebar"] .button {
+	width: 50px;
+	height: 30px;
+	margin: 0px 2.5px;
+}
+
 input[id="R_menuicon"]:checked+label+div {
     right: 0;
 }
@@ -619,8 +610,5 @@ ul[id="spot_list"] {
 
 div[id="loginBefore"] {
     height: 50px;
-}
-
-div[id="loginBefore"] button {
     margin-top: 15px;
 }
