@@ -306,7 +306,7 @@ function displayPlaces(places) {
 					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
 					var Name = $(this).children('.info').children('h5').text();
-					$("input[name='spot']:checked").siblings("input[class='search']").val(Name);
+					$("input[name='spot']:checked").siblings("input[class='spot_textfield']").val(Name);
 					var positionSpot = marker.getPosition();
 					var spot_index = $("input[name='spot']:checked").siblings("span[class='spot_num']").attr('id');
 
@@ -518,7 +518,7 @@ function removeAllChildNods(el) {
 
 // 검색창을 만들고 spotPlaces의 배열 요소를 하나 추가
 function create_spotbox() {
-	$("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "' style='margin: 10px;'>" + num + "</span> <input type='text' class='spot_textfield' placeholder='장소 입력'><input type='button' class='delete button sml_button' value='x'></li>");
+	$("#spot_list").append("<li class='spot'><input type='radio' name='spot' class='radio'><span class='spot_num' id = '" + ++num + "' style='margin: 10px;'>" + num + "</span> <input type='text' class='spot_textfield' placeholder='출발 장소'><input type='button' class='delete button sml_button' value='x'></li>");
 	spotPlaces.push("");
 
 	//TODO: 개인장소 마커 리스트를 늘린다.
