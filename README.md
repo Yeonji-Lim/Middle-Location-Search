@@ -9,6 +9,7 @@ In this case, we thought that if we had a site that recommended an intermediate 
 ## This is our site
 
 http://mlscaps.ml:8080/MLS/
+http://52.79.59.95:8080/MLS/
 
 ## Contents
 
