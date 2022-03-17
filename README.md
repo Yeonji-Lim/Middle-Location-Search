@@ -32,4 +32,8 @@ Rather than providing all the functions to one sidebar, the sidebar is divided i
 
 It is convenient for a user to use a web page by distinguishing between a portion for inputting information and a portion for receiving information.
 
+## Algorithm to Calculate Middle Location
 
+We use smallest-circle Algorithm
+
+https://en.wikipedia.org/wiki/Smallest-circle_problem
