@@ -16,7 +16,17 @@ In this case, we thought that if we had a site that recommended an intermediate 
 
 http://52.79.59.95:8080/MLS/
 
-<img width="1060" alt="image" src="https://user-images.githubusercontent.com/57888020/188382050-f77bf82f-7d3c-4329-bbc7-0f718127a236.png">
+![image](https://user-images.githubusercontent.com/57888020/188383125-e31de038-7c45-46a8-99cf-9f791a53e7a2.png)
+
+위 화면이 서비스 동작화면 입니다. 
+왼쪽 사이드바에서 장소 검색 및 입력할 수 있고, 
+중간 장소 보기를 입력하면 중간 장소가 노란 표시로 표시되며, 
+약속 추천 장소는 오른쪽 사이드바에서 리스트로도 볼 수 있고, 지도에 파란 표시로도 볼 수 있습니다.
+
+The above screen is the service operation screen. 
+You can search and enter places in the left sidebar 
+When you enter the middle place view, the middle place is marked with a yellow mark 
+You can see the recommend places in the list on the right sidebar or in blue on the map.
 
 ## 💻 Contents
 
