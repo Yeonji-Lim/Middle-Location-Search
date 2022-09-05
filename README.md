@@ -12,7 +12,7 @@ When people want to choose an appointment place, they want to gather in the midd
 
 In this case, we thought that if we had a site that recommended an intermediate place quickly and easily, we could reduce fatigue in determining an appointment place. 😎
 
-## 👀 This is our site
+## 👀 This is our service
 
 http://52.79.59.95:8080/MLS/
 
@@ -36,7 +36,7 @@ http://52.79.59.95:8080/MLS/
 
 모든 기능을 한 사이드바에 제공하는 것이 아니라 사이드바를 양쪽으로 나누어 기능을 구분하여 제공하고 있습니다.
 
-정보 입력 부분과 정보 수신 부분을 구분하여 사용자가 웹 페이지를 이용하는 것이 편리하게끔 하였습니다.
+정보 입력 부분과 정보  부분을 구분하여 사용자가 웹 페이지를 이용하는 것이 편리하게끔 하였습니다.
 
 This project operates on a single page.
 
