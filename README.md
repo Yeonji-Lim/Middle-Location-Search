@@ -16,6 +16,8 @@ In this case, we thought that if we had a site that recommended an intermediate 
 
 http://52.79.59.95:8080/MLS/
 
+<img width="1060" alt="image" src="https://user-images.githubusercontent.com/57888020/188382050-f77bf82f-7d3c-4329-bbc7-0f718127a236.png">
+
 ## 💻 Contents
 
 1. Map
