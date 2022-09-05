@@ -28,7 +28,7 @@ http://52.79.59.95:8080/MLS/
 
 ## 🖥 Screen composition
 
-이 프로젝트는 싱글페이지로 동작합니다.
+본 프로젝트는 SPA(Single Page Application)으로 구현되었습니다.
 
 화면 전체에 지도가 있고 반응형 사이드바가 양쪽에 있습니다.
 
@@ -38,7 +38,7 @@ http://52.79.59.95:8080/MLS/
 
 정보 입력 부분과 정보  부분을 구분하여 사용자가 웹 페이지를 이용하는 것이 편리하게끔 하였습니다.
 
-This project operates on a single page.
+This project has been implemented as a Single Page Application (SPA).
 
 There is a map throughout the screen, and reactive sidebars are on both sides.
 
