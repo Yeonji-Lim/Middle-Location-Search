@@ -14,8 +14,6 @@ In this case, we thought that if we had a site that recommended an intermediate 
 
 ## 👀 This is our service
 
-http://52.79.59.95:8080/MLS/
-
 ![image](https://user-images.githubusercontent.com/57888020/188383125-e31de038-7c45-46a8-99cf-9f791a53e7a2.png)
 
 위 화면이 서비스 동작화면 입니다. 
